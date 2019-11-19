@@ -8,11 +8,7 @@ CNodeDynamic::CNodeDynamic()
 
 CNodeDynamic::~CNodeDynamic()
 {
-	cout << "CNodeDynamic is closed" << endl;
-	for (int ii = 0; ii < v_children.size(); ii++)
-	{
-		delete v_children[ii];
-	}
+	vRemoveNode();
 }
 
 void CNodeDynamic::vRemoveNode(CNodeDynamic* node)
@@ -27,11 +23,6 @@ void CNodeDynamic::vRemoveNode(CNodeDynamic* node)
 
 void CNodeDynamic::vRemoveNode()
 {
-	for (int i = 0; i < iGetChildrenNumber(); i++)
-	{
-		v_children[i]->vRemoveNode(this->v_children[i]);
-	}
-	v_children.clear();
 	vRemoveNode(this);
 }
 
@@ -49,6 +40,12 @@ void CNodeDynamic::vAddNewChild()
 	CNodeDynamic* c = new CNodeDynamic;
 	c->pc_parent_node = this;
 	v_children.push_back(c);
+}
+void CNodeDynamic::vAddNewChild(CNodeDynamic cnd)
+{
+	CNodeDynamic c = cnd;
+	c.pc_parent_node = this;
+	v_children.push_back(&c);
 }
 
 CNodeDynamic* CNodeDynamic::pcGetChild(int iChildOffset)

@@ -21,6 +21,7 @@ public:
 	void vSetValue(int iNewVal);
 	int iGetChildrenNumber();
 	void  vAddNewChild();
+	void vAddNewChild(CNodeDynamic cnd);
 	void  vPrint();
 	void  vPrintAllBelow();
 

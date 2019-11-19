@@ -2,7 +2,7 @@
 
 CNodeStatic::~CNodeStatic()
 {
-	vRemoveNode(this);
+	vRemoveNode();
 }
 
 void CNodeStatic::vRemoveNode(CNodeStatic* node)
@@ -17,11 +17,6 @@ void CNodeStatic::vRemoveNode(CNodeStatic* node)
 
 void CNodeStatic::vRemoveNode()
 {
-	/*for (int i = 0; i < iGetChildrenNumber(); i++)
-	{
-		v_children[i].vRemoveNode(&this->v_children[i]);
-	}
-	v_children.clear();*/
 	vRemoveNode(this);
 }
 
