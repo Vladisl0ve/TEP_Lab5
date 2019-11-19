@@ -1,5 +1,11 @@
 #include "CNodeStatic.h"
 
+CNodeStatic::CNodeStatic()
+{
+	i_val = iDEFAULT_VAL;
+	pc_parent_node = NULL;
+};
+
 CNodeStatic::~CNodeStatic()
 {
 	vRemoveNode();
@@ -20,6 +26,16 @@ void CNodeStatic::vRemoveNode()
 	vRemoveNode(this);
 }
 
+void CNodeStatic::vSetValue(int iNewVal)
+{
+	i_val = iNewVal;
+};
+
+int CNodeStatic::iGetChildrenNumber()
+{
+	return(v_children.size());
+};
+
 void CNodeStatic::vAddNewChild()
 {
 	CNodeStatic c;
@@ -39,21 +55,23 @@ CNodeStatic* CNodeStatic::pcGetChild(int iChildOffset)
 		cout << "iChildOffset < 0, prosze wprowadzic nowa wartosc" << endl;
 		cin >> iChildOffset;
 	}
-	if (this->iGetChildrenNumber() != 0) {
+	if (this->iGetChildrenNumber() != 0)
 		return &(this->v_children[iChildOffset]);
-	}
-	else {
+	else
 		return NULL;
-	}
+
 }
+
+void CNodeStatic::vPrint()
+{
+	cout << " " << i_val;
+};
 
 void CNodeStatic::vPrintAllBelow()
 {
 	this->vPrint();
 	for (int i = 0; i < this->iGetChildrenNumber(); i++)
-	{
 		this->v_children[i].vPrintAllBelow();
-	}
 }
 
 void CNodeStatic::vPrintUp() {

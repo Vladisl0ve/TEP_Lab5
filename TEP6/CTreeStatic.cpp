@@ -3,13 +3,17 @@
 CTreeStatic::CTreeStatic()
 {
 	c_root = CNodeStatic();
-
 }
 
 
 CTreeStatic::~CTreeStatic()
 {
 }
+
+CNodeStatic* CTreeStatic::pcGetRoot()
+{
+	return &c_root;
+};
 
 bool CTreeStatic::bMoveSubtree(CNodeStatic* pcParentNode, CNodeStatic* pcNewChildNode)
 {

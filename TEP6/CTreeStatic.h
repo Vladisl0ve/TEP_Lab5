@@ -1,6 +1,3 @@
-#ifndef CTreeStatic_H
-#define CTreeStatic_H
-
 #include "CNodeStatic.h"
 
 #include <iostream>
@@ -16,18 +13,13 @@ public:
 	CTreeStatic();
 	~CTreeStatic();
 
-	CNodeStatic  *pcGetRoot()
-	{
-		return(&c_root);
-	}
+	CNodeStatic* pcGetRoot();
 	bool bMoveSubtree(CNodeStatic* pcParentNode, CNodeStatic* pcNewChildNode);
 	void  vPrintTree();
 
 private:
 
-	CNodeStatic  c_root;
+	CNodeStatic c_root;
 
-};//class  CTreeStatic 
-
-#endif
+};
 

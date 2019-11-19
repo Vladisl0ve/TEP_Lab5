@@ -1,6 +1,4 @@
-#ifndef CNODESTATIC_H
-#define CNODESTATIC_H
-
+#pragma once
 #include <iostream>
 #include <string>
 #include <vector>
@@ -10,38 +8,26 @@ using namespace std;
 class  CNodeStatic {
 
 public:
-	CNodeStatic()
-	{
-		i_val = 0;
-		pc_parent_node = NULL;
-	};
+	CNodeStatic();
 	~CNodeStatic();
 
 	void vRemoveNode(CNodeStatic* node);
 	void vRemoveNode();
 
-	void  vSetValue(int  iNewVal)
-	{
-		i_val = iNewVal;
-	};
+	void  vSetValue(int  iNewVal);
 
-	int  iGetChildrenNumber()
-	{
-		return(v_children.size());
-	};
-	void  vAddNewChild();
+	int iGetChildrenNumber();
+	void vAddNewChild();
 	void vAddNewChild(CNodeStatic cnd);
-	CNodeStatic  *pcGetChild(int  iChildOffset);
-	void  vPrint() { cout << " " << i_val; };
+	CNodeStatic* pcGetChild(int  iChildOffset);
+	void  vPrint();
 	void  vPrintAllBelow();
 	void  vPrintUp();
 
 private:
-
 	vector <CNodeStatic> v_children;
-	CNodeStatic  *pc_parent_node;
+	CNodeStatic* pc_parent_node;
 	int  i_val;
+	const int iDEFAULT_VAL = 0;
 
-};//class  CNodeStatic 
-
-#endif
+};
