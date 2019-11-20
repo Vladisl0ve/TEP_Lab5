@@ -14,6 +14,7 @@ bool CTreeDynamic::bMoveSubtree(CNodeDynamic* pcParentNode, CNodeDynamic* pcNewC
 {
 	pcParentNode->vAddNewChild(pcNewChildNode);
 	pcNewChildNode->vRemoveNode();
+	pcNewChildNode->vRemoveFromParent();
 	return true;
 }
 CNodeDynamic* CTreeDynamic::pcGetRoot()

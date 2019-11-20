@@ -20,6 +20,13 @@ void CNodeStatic::operator=(const CNodeStatic& node)
 		v_children.push_back(node.v_children[i]);
 	}
 }
+bool CNodeStatic::operator==(const CNodeStatic& node)
+{
+	if (i_val == node.i_val && pc_parent_node == node.pc_parent_node)
+		return true;
+	else
+		return false;
+}
 
 void CNodeStatic::vRemoveNode(CNodeStatic* node)
 {
@@ -29,6 +36,21 @@ void CNodeStatic::vRemoveNode(CNodeStatic* node)
 	}
 	node->v_children.clear();
 	node = nullptr;
+}
+void CNodeStatic::vRemoveFromParent(CNodeStatic* node)
+{
+	for (int i = 0; i < node->pc_parent_node->iGetChildrenNumber(); i++)
+	{
+		if (node->pc_parent_node->v_children[i] == *node)
+		{
+			node->pc_parent_node->v_children.erase(node->pc_parent_node->v_children.begin() + i);
+			return;
+		}
+	}
+}
+void CNodeStatic::vRemoveFromParent()
+{
+	vRemoveFromParent(this);
 }
 
 void CNodeStatic::vRemoveNode()

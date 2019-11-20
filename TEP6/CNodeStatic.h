@@ -11,8 +11,11 @@ public:
 	CNodeStatic();
 	~CNodeStatic();
 	void operator=(const CNodeStatic& node);
-
+
+	bool operator==(const CNodeStatic& node);
 	void vRemoveNode(CNodeStatic* node);
+	void vRemoveFromParent(CNodeStatic* node);
+	void vRemoveFromParent();
 	void vRemoveNode();
 
 	void  vSetValue(int  iNewVal);

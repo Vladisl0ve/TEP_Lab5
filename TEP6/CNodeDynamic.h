@@ -12,6 +12,12 @@ public:
 	CNodeDynamic();
 	~CNodeDynamic();
 
+	bool operator==(const CNodeDynamic& node);
+
+	void vRemoveFromParent(CNodeDynamic* node);
+
+	void vRemoveFromParent();
+
 	void vRemoveNode(CNodeDynamic* node);
 
 	void vRemoveNode();

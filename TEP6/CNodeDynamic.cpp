@@ -10,6 +10,28 @@ CNodeDynamic::~CNodeDynamic()
 {
 	vRemoveNode();
 }
+bool CNodeDynamic::operator==(const CNodeDynamic& node)
+{
+	if (i_val == node.i_val && pc_parent_node == node.pc_parent_node)
+		return true;
+	else
+		return false;
+}
+void CNodeDynamic::vRemoveFromParent(CNodeDynamic* node)
+{
+	for (int i = 0; i < node->pc_parent_node->iGetChildrenNumber(); i++)
+	{
+		if (node->pc_parent_node->v_children[i] == node)
+		{
+			node->pc_parent_node->v_children.erase(node->pc_parent_node->v_children.begin() + i);
+			return;
+		}
+	}
+}
+void CNodeDynamic::vRemoveFromParent()
+{
+	vRemoveFromParent(this);
+}
 
 void CNodeDynamic::vRemoveNode(CNodeDynamic* node)
 {
