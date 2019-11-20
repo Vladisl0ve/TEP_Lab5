@@ -11,6 +11,16 @@ CNodeStatic::~CNodeStatic()
 	vRemoveNode();
 }
 
+void CNodeStatic::operator=(const CNodeStatic& node)
+{
+	this->i_val = node.i_val;
+	this->pc_parent_node = node.pc_parent_node;
+	for (int i = 0; i < iGetChildrenNumber(); i++)
+	{
+		v_children.push_back(node.v_children[i]);
+	}
+}
+
 void CNodeStatic::vRemoveNode(CNodeStatic* node)
 {
 	for (int i = 0; i < node->iGetChildrenNumber(); i++)
@@ -51,15 +61,15 @@ void CNodeStatic::vAddNewChild(CNodeStatic cnd)
 
 CNodeStatic* CNodeStatic::pcGetChild(int iChildOffset)
 {
-	while (iChildOffset < 0) {
-		cout << "iChildOffset < 0, prosze wprowadzic nowa wartosc" << endl;
-		cin >> iChildOffset;
+	if (iChildOffset < 0) {
+		cout << "Error: child's place must be greater than 0. You had: " << iChildOffset << endl;
+		return NULL;
 	}
+
 	if (this->iGetChildrenNumber() != 0)
 		return &(this->v_children[iChildOffset]);
 	else
 		return NULL;
-
 }
 
 void CNodeStatic::vPrint()
@@ -78,5 +88,11 @@ void CNodeStatic::vPrintUp() {
 	this->vPrint();
 	if (this->pc_parent_node != NULL)
 		(this->pc_parent_node)->vPrintUp();
+}
+void CNodeStatic::vFindGreater(int iVal) {
+	if (i_val > iVal)
+		cout << i_val << " ";
 
+	for (int i = 0; i < this->iGetChildrenNumber(); i++)
+		this->v_children[i].vFindGreater(iVal);
 }

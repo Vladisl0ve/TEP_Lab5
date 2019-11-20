@@ -41,11 +41,18 @@ void CNodeDynamic::vAddNewChild()
 	c->pc_parent_node = this;
 	v_children.push_back(c);
 }
-void CNodeDynamic::vAddNewChild(CNodeDynamic cnd)
+void CNodeDynamic::vAddNewChild(CNodeDynamic* cnd)
 {
-	CNodeDynamic c = cnd;
-	c.pc_parent_node = this;
-	v_children.push_back(&c);
+	CNodeDynamic* c = new CNodeDynamic;
+	c->i_val = cnd->i_val;
+	c->pc_parent_node = this;
+
+	for (int i = 0; i < cnd->iGetChildrenNumber(); i++)
+	{
+		c->v_children.push_back(cnd->pcGetChild(i));
+	}
+	v_children.push_back(c);
+
 }
 
 CNodeDynamic* CNodeDynamic::pcGetChild(int iChildOffset)

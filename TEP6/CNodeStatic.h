@@ -10,6 +10,7 @@ class  CNodeStatic {
 public:
 	CNodeStatic();
 	~CNodeStatic();
+	void operator=(const CNodeStatic& node);
 
 	void vRemoveNode(CNodeStatic* node);
 	void vRemoveNode();
@@ -23,6 +24,8 @@ public:
 	void  vPrint();
 	void  vPrintAllBelow();
 	void  vPrintUp();
+
+	void vFindGreater(int iVal);
 
 private:
 	vector <CNodeStatic> v_children;
