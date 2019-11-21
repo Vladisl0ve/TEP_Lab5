@@ -30,7 +30,7 @@ int main()
 	ctdSecond.pcGetRoot()->pcGetChild(1)->vSetValue(30);
 
 	ctdFirst.bMoveSubtree(ctdFirst.pcGetRoot()->pcGetChild(0)->pcGetChild(0), ctdSecond.pcGetRoot()->pcGetChild(0));
-	ctdFirst.vPrintTree();
+	ctdFirst.vPrintNice();
 	cout << endl;
 	ctdSecond.vPrintTree();
 	cout << endl;
@@ -67,6 +67,6 @@ int main()
 	cout << endl;
 	ctsSecond.vPrintTree();
 	cout << "\n###" << endl;
-	ctsFirst.pcGetRoot()->vFindGreater(100);
+
 	system("pause");
 }

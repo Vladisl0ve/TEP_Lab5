@@ -26,6 +26,8 @@ public:
 	CNodeStatic* pcGetChild(int  iChildOffset);
 	void  vPrint();
 	void  vPrintAllBelow();
+	void vPrintModify();
+	void vPrintParent();
 	void  vPrintUp();
 
 	void vFindGreater(int iVal);

@@ -17,6 +17,8 @@ public:
 	bool bMoveSubtree(CNodeStatic* pcParentNode, CNodeStatic* pcNewChildNode);
 	void  vPrintTree();
 
+	void vPrintModify();
+
 private:
 
 	CNodeStatic c_root;

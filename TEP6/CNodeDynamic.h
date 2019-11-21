@@ -24,6 +24,8 @@ public:
 
 	CNodeDynamic* pcGetChild(int  iChildOffset);
 
+	void vPrintNicely(int count);
+
 	void vSetValue(int iNewVal);
 	int iGetChildrenNumber();
 	void vAddNewChild();

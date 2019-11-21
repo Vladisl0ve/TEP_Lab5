@@ -8,7 +8,7 @@ CNodeStatic::CNodeStatic()
 
 CNodeStatic::~CNodeStatic()
 {
-	vRemoveNode();
+
 }
 
 void CNodeStatic::operator=(const CNodeStatic& node)
@@ -102,10 +102,13 @@ void CNodeStatic::vPrint()
 void CNodeStatic::vPrintAllBelow()
 {
 	this->vPrint();
-	for (int i = 0; i < this->iGetChildrenNumber(); i++)
-		this->v_children[i].vPrintAllBelow();
-}
 
+	for (int i = 0; i < this->iGetChildrenNumber(); i++) {
+		
+		this->v_children[i].vPrintAllBelow();
+
+	}
+}
 void CNodeStatic::vPrintUp() {
 	this->vPrint();
 	if (this->pc_parent_node != NULL)

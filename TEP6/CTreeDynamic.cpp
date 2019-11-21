@@ -25,3 +25,7 @@ void CTreeDynamic::vPrintTree()
 {
 	pc_root->vPrintAllBelow();
 }
+void CTreeDynamic::vPrintNice()
+{
+	pc_root->vPrintNicely(0);
+}

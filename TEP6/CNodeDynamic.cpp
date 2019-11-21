@@ -90,6 +90,22 @@ CNodeDynamic* CNodeDynamic::pcGetChild(int iChildOffset)
 		return NULL;
 
 }
+void CNodeDynamic::vPrintNicely(int count)
+{
+
+	this->vPrint();
+	for (int i = 0; i < this->iGetChildrenNumber(); i++) {
+		cout << endl;
+		for (int i = 0; i < count; i++) {
+			cout << "   ";
+		}
+		cout << "|---";
+		count++;
+		this->v_children[i]->vPrintNicely(count);
+	}
+
+
+}
 
 void CNodeDynamic::vPrint()
 {
