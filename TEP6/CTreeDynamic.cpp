@@ -8,13 +8,13 @@ CTreeDynamic::CTreeDynamic()
 
 CTreeDynamic::~CTreeDynamic()
 {
-	pcGetRoot()->vRemoveNode();
+	delete pcGetRoot();
 }
 bool CTreeDynamic::bMoveSubtree(CNodeDynamic* pcParentNode, CNodeDynamic* pcNewChildNode)
 {
 	pcParentNode->vAddNewChild(pcNewChildNode);
-	pcNewChildNode->vRemoveNode();
-	pcNewChildNode->vRemoveFromParent();
+	//pcNewChildNode->vRemoveNode();
+	pcNewChildNode->bRemoveNode();
 	return true;
 }
 CNodeDynamic* CTreeDynamic::pcGetRoot()

@@ -11,57 +11,59 @@ CNodeStatic::~CNodeStatic()
 
 }
 
-void CNodeStatic::operator=(const CNodeStatic& node)
+//void CNodeStatic::operator=(const CNodeStatic& node)
+//{
+//	this->i_val = node.i_val;
+//	this->pc_parent_node = node.pc_parent_node;
+//	for (int i = 0; i < iGetChildrenNumber(); i++)
+//	{
+//		v_children.push_back(node.v_children[i]);
+//	}
+//}
+int CNodeStatic::getOffset(CNodeStatic* node)
 {
-	this->i_val = node.i_val;
-	this->pc_parent_node = node.pc_parent_node;
-	for (int i = 0; i < iGetChildrenNumber(); i++)
-	{
-		v_children.push_back(node.v_children[i]);
-	}
-}
-bool CNodeStatic::operator==(const CNodeStatic& node)
-{
-	if (i_val == node.i_val && pc_parent_node == node.pc_parent_node)
-		return true;
-	else
-		return false;
-}
+	int offset = -1;
 
-void CNodeStatic::vRemoveNode(CNodeStatic* node)
-{
-	for (int i = 0; i < node->iGetChildrenNumber(); i++)
-	{
-		node->v_children[i].vRemoveNode(&node->v_children[i]);
-	}
-	node->v_children.clear();
-	node = nullptr;
-}
-void CNodeStatic::vRemoveFromParent(CNodeStatic* node)
-{
-	for (int i = 0; i < node->pc_parent_node->iGetChildrenNumber(); i++)
-	{
-		if (node->pc_parent_node->v_children[i] == *node)
-		{
-			node->pc_parent_node->v_children.erase(node->pc_parent_node->v_children.begin() + i);
-			return;
+	for (int i = 0; i < this->iGetChildrenNumber(); i++) {
+		if (&(this->v_children.at(i)) == node) {
+			offset = i;
 		}
 	}
-}
-void CNodeStatic::vRemoveFromParent()
-{
-	vRemoveFromParent(this);
-}
 
-void CNodeStatic::vRemoveNode()
+	return offset;
+}
+//bool CNodeStatic::operator==(const CNodeStatic& node)
+//{
+//	if (i_val == node.i_val)
+//		return true;
+//	else
+//		return false;
+//}
+
+bool CNodeStatic::bRemoveNode(CNodeStatic* node)
 {
-	vRemoveNode(this);
+	int offset = node->pc_parent_node->getOffset(node);
+	if (offset == -1 || node == nullptr)
+		return false;
+
+	node->pc_parent_node->v_children.erase(node->pc_parent_node->v_children.begin() + offset);
+	node->pc_parent_node = NULL;
+	return true;
+}
+bool CNodeStatic::bRemoveNode()
+{
+	return bRemoveNode(this);
 }
 
 void CNodeStatic::vSetValue(int iNewVal)
 {
 	i_val = iNewVal;
-};
+}
+CNodeStatic* CNodeStatic::getParent()
+{
+	return pc_parent_node;
+}
+;
 
 int CNodeStatic::iGetChildrenNumber()
 {

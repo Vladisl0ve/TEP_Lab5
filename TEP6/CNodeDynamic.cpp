@@ -8,45 +8,37 @@ CNodeDynamic::CNodeDynamic()
 
 CNodeDynamic::~CNodeDynamic()
 {
-	vRemoveNode();
-}
-bool CNodeDynamic::operator==(const CNodeDynamic& node)
-{
-	if (i_val == node.i_val && pc_parent_node == node.pc_parent_node)
-		return true;
-	else
-		return false;
-}
-void CNodeDynamic::vRemoveFromParent(CNodeDynamic* node)
-{
-	for (int i = 0; i < node->pc_parent_node->iGetChildrenNumber(); i++)
+	for (int i = 0; i < iGetChildrenNumber(); i++)
 	{
-		if (node->pc_parent_node->v_children[i] == node)
-		{
-			node->pc_parent_node->v_children.erase(node->pc_parent_node->v_children.begin() + i);
-			return;
+		delete v_children.at(i);
+	}
+}
+int CNodeDynamic::getOffset(CNodeDynamic* node)
+{
+	int offset = -1;
+
+	for (int i = 0; i < iGetChildrenNumber(); i++)
+	{
+		if (v_children.at(i) == node) {
+			offset = i;
 		}
 	}
+	return offset;
 }
-void CNodeDynamic::vRemoveFromParent()
+bool CNodeDynamic::bRemoveNode(CNodeDynamic* node)
 {
-	vRemoveFromParent(this);
+	int offset = node->pc_parent_node->getOffset(node);
+	if (offset == -1 || node == nullptr)
+		return false;
+
+	node->pc_parent_node->v_children.erase(node->pc_parent_node->v_children.begin() + offset);
+	return true;
+}
+bool CNodeDynamic::bRemoveNode()
+{
+	return bRemoveNode(this);
 }
 
-void CNodeDynamic::vRemoveNode(CNodeDynamic* node)
-{
-	for (int i = 0; i < node->iGetChildrenNumber(); i++)
-	{
-		node->v_children[i]->vRemoveNode(node->v_children[i]);
-	}
-	node->v_children.clear();
-	node = nullptr;
-}
-
-void CNodeDynamic::vRemoveNode()
-{
-	vRemoveNode(this);
-}
 
 void CNodeDynamic::vSetValue(int iNewVal)
 {
@@ -56,6 +48,8 @@ int CNodeDynamic::iGetChildrenNumber()
 {
 	return v_children.size();
 }
+
+
 
 void CNodeDynamic::vAddNewChild()
 {

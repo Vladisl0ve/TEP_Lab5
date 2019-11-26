@@ -10,24 +10,21 @@ class  CNodeStatic {
 public:
 	CNodeStatic();
 	~CNodeStatic();
-	void operator=(const CNodeStatic& node);
-
-	bool operator==(const CNodeStatic& node);
-	void vRemoveNode(CNodeStatic* node);
-	void vRemoveFromParent(CNodeStatic* node);
-	void vRemoveFromParent();
-	void vRemoveNode();
+
+	int getOffset(CNodeStatic* node);
+
+	bool bRemoveNode(CNodeStatic* node);
+
+	bool bRemoveNode();
 
 	void  vSetValue(int  iNewVal);
-
+	CNodeStatic* getParent();
 	int iGetChildrenNumber();
 	void vAddNewChild();
 	void vAddNewChild(CNodeStatic cnd);
 	CNodeStatic* pcGetChild(int  iChildOffset);
 	void  vPrint();
 	void  vPrintAllBelow();
-	void vPrintModify();
-	void vPrintParent();
 	void  vPrintUp();
 
 	void vFindGreater(int iVal);

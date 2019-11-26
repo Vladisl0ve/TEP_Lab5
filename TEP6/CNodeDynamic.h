@@ -14,13 +14,9 @@ public:
 
 	bool operator==(const CNodeDynamic& node);
 
-	void vRemoveFromParent(CNodeDynamic* node);
+	bool bRemoveNode(CNodeDynamic* node);
 
-	void vRemoveFromParent();
-
-	void vRemoveNode(CNodeDynamic* node);
-
-	void vRemoveNode();
+	bool bRemoveNode();
 
 	CNodeDynamic* pcGetChild(int  iChildOffset);
 
@@ -28,6 +24,7 @@ public:
 
 	void vSetValue(int iNewVal);
 	int iGetChildrenNumber();
+	int getOffset(CNodeDynamic* node);
 	void vAddNewChild();
 	void vAddNewChild(CNodeDynamic* cnd);
 	void vPrint();
