@@ -11,6 +11,8 @@ public:
 	CNodeStatic();
 	~CNodeStatic();
 
+	void operator=(const CNodeStatic& node);
+
 	int getOffset(CNodeStatic* node);
 
 	bool bRemoveNode(CNodeStatic* node);

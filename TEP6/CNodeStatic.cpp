@@ -1,5 +1,7 @@
 #include "CNodeStatic.h"
 
+
+
 CNodeStatic::CNodeStatic()
 {
 	i_val = iDEFAULT_VAL;
@@ -11,15 +13,12 @@ CNodeStatic::~CNodeStatic()
 
 }
 
-//void CNodeStatic::operator=(const CNodeStatic& node)
-//{
-//	this->i_val = node.i_val;
-//	this->pc_parent_node = node.pc_parent_node;
-//	for (int i = 0; i < iGetChildrenNumber(); i++)
-//	{
-//		v_children.push_back(node.v_children[i]);
-//	}
-//}
+void CNodeStatic::operator=(const CNodeStatic& node)
+{
+	this->i_val = node.i_val;
+	this->pc_parent_node = node.pc_parent_node;
+	
+}
 int CNodeStatic::getOffset(CNodeStatic* node)
 {
 	int offset = -1;

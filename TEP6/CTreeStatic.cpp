@@ -18,7 +18,7 @@ CNodeStatic* CTreeStatic::pcGetRoot()
 bool CTreeStatic::bMoveSubtree(CNodeStatic* pcParentNode, CNodeStatic* pcNewChildNode)
 {
 	pcParentNode->vAddNewChild(*pcNewChildNode);
-	pcNewChildNode.
+	pcNewChildNode->bRemoveNode();
 	return true;
 }
 
