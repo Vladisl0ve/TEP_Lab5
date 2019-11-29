@@ -10,7 +10,6 @@ public:
 	bool bMoveSubtree(CNodeDynamic* pcParentNode, CNodeDynamic* pcNewChildNode);
 	CNodeDynamic* pcGetRoot();
 	void vPrintTree();
-	void vPrintNice();
 private:
 	CNodeDynamic* pc_root;
 };

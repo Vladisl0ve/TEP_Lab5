@@ -2,7 +2,8 @@
 
 CTreeStatic::CTreeStatic()
 {
-	this->c_root = CNodeStatic();
+	CNodeStatic newRoot;
+	c_root = newRoot;
 }
 
 
@@ -24,5 +25,5 @@ bool CTreeStatic::bMoveSubtree(CNodeStatic* pcParentNode, CNodeStatic* pcNewChil
 
 void CTreeStatic::vPrintTree()
 {
-	c_root.vPrintAllBelow();
+	c_root.vPrintTreeScheme(0);
 }

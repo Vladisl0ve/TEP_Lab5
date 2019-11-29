@@ -13,15 +13,9 @@ CNodeStatic::~CNodeStatic()
 
 }
 
-void CNodeStatic::operator=(const CNodeStatic& node)
-{
-	this->i_val = node.i_val;
-	this->pc_parent_node = node.pc_parent_node;
-	
-}
 int CNodeStatic::getOffset(CNodeStatic* node)
 {
-	int offset = -1;
+	int offset = iDEFAULT_VAL_ERROR;
 
 	for (int i = 0; i < this->iGetChildrenNumber(); i++) {
 		if (&(this->v_children.at(i)) == node) {
@@ -31,18 +25,11 @@ int CNodeStatic::getOffset(CNodeStatic* node)
 
 	return offset;
 }
-//bool CNodeStatic::operator==(const CNodeStatic& node)
-//{
-//	if (i_val == node.i_val)
-//		return true;
-//	else
-//		return false;
-//}
 
 bool CNodeStatic::bRemoveNode(CNodeStatic* node)
 {
 	int offset = node->pc_parent_node->getOffset(node);
-	if (offset == -1 || node == nullptr)
+	if (offset == iDEFAULT_VAL_ERROR|| node == nullptr)
 		return false;
 
 	node->pc_parent_node->v_children.erase(node->pc_parent_node->v_children.begin() + offset);
@@ -114,6 +101,19 @@ void CNodeStatic::vPrintUp() {
 	this->vPrint();
 	if (this->pc_parent_node != NULL)
 		(this->pc_parent_node)->vPrintUp();
+}
+void CNodeStatic::vPrintTreeScheme(int iSpace)
+{
+	vPrint();
+	std::cout << "\n";
+	for (int i = 0; i < v_children.size(); i++) {
+		for (int j = 0; j < iSpace; j++) {
+			std::cout << "  ";
+		}
+		std::cout << "|-";
+		v_children[i].vPrintTreeScheme(iSpace + 1);
+
+	}
 }
 void CNodeStatic::vFindGreater(int iVal) {
 	if (i_val > iVal)

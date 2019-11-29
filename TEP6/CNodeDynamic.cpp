@@ -15,7 +15,7 @@ CNodeDynamic::~CNodeDynamic()
 }
 int CNodeDynamic::getOffset(CNodeDynamic* node)
 {
-	int offset = -1;
+	int offset = iDEFAULT_VAL_ERROR;
 
 	for (int i = 0; i < iGetChildrenNumber(); i++)
 	{
@@ -28,7 +28,7 @@ int CNodeDynamic::getOffset(CNodeDynamic* node)
 bool CNodeDynamic::bRemoveNode(CNodeDynamic* node)
 {
 	int offset = node->pc_parent_node->getOffset(node);
-	if (offset == -1 || node == nullptr)
+	if (offset == iDEFAULT_VAL_ERROR || node == nullptr)
 		return false;
 
 	node->pc_parent_node->v_children.erase(node->pc_parent_node->v_children.begin() + offset);
@@ -84,31 +84,36 @@ CNodeDynamic* CNodeDynamic::pcGetChild(int iChildOffset)
 		return NULL;
 
 }
-void CNodeDynamic::vPrintNicely(int count)
-{
-
-	this->vPrint();
-	for (int i = 0; i < this->iGetChildrenNumber(); i++) {
-		cout << endl;
-		for (int i = 0; i < count; i++) {
-			cout << "   ";
-		}
-		cout << "|---";
-		count++;
-		this->v_children[i]->vPrintNicely(count);
-	}
-
-
-}
-
 void CNodeDynamic::vPrint()
 {
 	cout << " " << i_val;
-}
+};
 
 void CNodeDynamic::vPrintAllBelow()
 {
+	vPrint();
+
+	for (int i = 0; i < this->iGetChildrenNumber(); i++) {
+
+		v_children[i]->vPrintAllBelow();
+
+	}
+}
+void CNodeDynamic::vPrintUp() {
 	this->vPrint();
-	for (int i = 0; i < this->iGetChildrenNumber(); i++)
-		this->v_children[i]->vPrintAllBelow();
+	if (this->pc_parent_node != NULL)
+		(this->pc_parent_node)->vPrintUp();
+}
+void CNodeDynamic::vPrintTreeScheme(int iSpace)
+{
+	vPrint();
+	std::cout << "\n";
+	for (int i = 0; i < v_children.size(); i++) {
+		for (int j = 0; j < iSpace; j++) {
+			std::cout << "  ";
+		}
+		std::cout << "|-";
+		v_children[i]->vPrintTreeScheme(iSpace + 1);
+
+	}
 }

@@ -30,11 +30,11 @@ int main()
 	ctdSecond.pcGetRoot()->pcGetChild(1)->vSetValue(30);
 
 	ctdFirst.bMoveSubtree(ctdFirst.pcGetRoot()->pcGetChild(0)->pcGetChild(0), ctdSecond.pcGetRoot()->pcGetChild(0));
-	ctdFirst.vPrintNice();
+	ctdFirst.vPrintTree();
 	cout << endl;
 	ctdSecond.vPrintTree();
 	cout << endl;
-	cout << "---" << endl;
+	cout << "---" << endl; // ---------------------------------------------------------------------
 	cout << endl;
 	CTreeStatic ctsFirst;
 	ctsFirst.pcGetRoot()->vSetValue(1);
